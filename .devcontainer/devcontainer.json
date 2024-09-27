@@ -1,0 +1,32 @@
+{
+  "name": "Node.js Alpine Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18-alpine",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",              // ESLint for linting
+    "esbenp.prettier-vscode",              // Prettier for formatting
+    "ritwickdey.LiveServer",               // Live Server to preview your SPA
+    "eg2.vscode-npm-script",               // npm script integration
+    "GitHub.copilot",                      // GitHub Copilot for coding suggestions
+    "GitHub.copilot-chat",                 // GitHub Copilot Chat for AI-powered chat
+    "GitHub.vscode-pull-request-github",   // GitHub PR and GitHub Pages management
+    "github.github-vscode-theme",          // GitHub colorblind dark theme
+    "vscode-icons-team.vscode-icons"       // VSCode icons for file icons
+  ],
+  "settings": {
+    "workbench.colorTheme": "GitHub Dark Colorblind",
+    "workbench.iconTheme": "vscode-icons"
+  },
+  "postCreateCommand": "npm install",
+  "forwardPorts": [3000],
+  "features": {
+    "ghcr.io/devcontainers/features/prebuilds:1": {
+      "enabled": true
+    }
+  },
+  "remoteUser": "vscode"
+}
