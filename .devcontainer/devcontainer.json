@@ -1,13 +1,13 @@
 {
-  "name": "Node.js Alpine Dev Environment",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:18-alpine",
+  "name": "Node.js Development Environment",
+  "image": "node:18-bullseye",
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "true",
+      "username": "node",
+      "upgradePackages": "true"
     },
-    "ghcr.io/devcontainers/features/prebuilds:1": {
-      "enabled": true
-    }
+    "ghcr.io/devcontainers/features/git:1": {}
   },
   "extensions": [
     "dbaeumer.vscode-eslint",
@@ -17,14 +17,26 @@
     "GitHub.copilot",
     "GitHub.copilot-chat",
     "GitHub.vscode-pull-request-github",
-    "github.github-vscode-theme",
+    "GitHub.github-vscode-theme",
     "vscode-icons-team.vscode-icons"
   ],
   "settings": {
-    "workbench.colorTheme": "GitHub Dark Colorblind",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "workbench.colorTheme": "GitHub Dark Default",
     "workbench.iconTheme": "vscode-icons"
   },
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "echo 'Container creation started at: ' $(date) > /workspace/timing.log && npm install && echo 'Container creation finished at: ' $(date) >> /workspace/timing.log",
+  "postStartCommand": "echo 'Container started at: ' $(date) >> /workspace/timing.log",
   "forwardPorts": [3000],
-  "remoteUser": "vscode"
+  "remoteUser": "node",
+  "updateContentCommand": "npm install",
+  "waitFor": "updateContentCommand",
+  "customizations": {
+    "vscode": {
+      "extensions": ["GitHub.copilot", "GitHub.copilot-chat"]
+    },
+    "codespaces": {
+      "openFiles": ["README.md", "src/index.js", "timing.log"]
+    }
+  }
 }
